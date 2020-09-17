@@ -1,0 +1,18 @@
+// I generated a colourscheme using Pantone colours on Adobe Color. The result
+// is below.
+$Map-Color-Scheme-1-hex: #3B3D3F;
+$Map-Color-Scheme-2-hex: #FF8573;
+$Map-Color-Scheme-3-hex: #FEB237;
+$Map-Color-Scheme-4-hex: #288A7C;
+$Map-Color-Scheme-5-hex: #D6DED9;
+
+// Nicer color definitions:
+$c-black: $Map-Color-Scheme-1-hex;
+$c-salmon: $Map-Color-Scheme-2-hex;
+$c-yellow: $Map-Color-Scheme-3-hex;
+$c-teal: $Map-Color-Scheme-4-hex;
+$c-white: $Map-Color-Scheme-5-hex;
+
+// Some theming colours:
+$c-background: $c-black;
+$c-text: $c-white;
