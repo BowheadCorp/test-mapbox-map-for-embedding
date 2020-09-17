@@ -2,11 +2,10 @@
   "name": "test-mapbox-map-for-embedding",
   "version": "0.1.0",
   "description": "Just testing making a custom Mapbox map embed with pulling data from random sources",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node scripts/dev.js",
-    "build": "parcel build src/index.html"
+    "build": "parcel build ./src/index.html"
   },
   "repository": {
     "type": "git",
@@ -24,13 +23,20 @@
   },
   "homepage": "https://github.com/jo12bar/test-mapbox-map-for-embedding#readme",
   "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@types/geojson": "^7946.0.7",
+    "@types/mapbox-gl": "^1.12.0",
+    "@types/node": "^14.10.2",
+    "@types/parse-link-header": "^1.0.0",
     "cross-env": "^7.0.2",
+    "parcel": "^2.0.0-beta.1",
     "parcel-bundler": "^1.12.4",
     "sass": "^1.26.10",
     "typescript": "^4.0.2"
   },
   "dependencies": {
     "mapbox-gl": "^1.12.0",
-    "normalize.css": "^8.0.1"
+    "normalize.css": "^8.0.1",
+    "parse-link-header": "^1.0.1"
   }
 }

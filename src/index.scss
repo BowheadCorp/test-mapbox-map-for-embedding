@@ -1,6 +1,7 @@
-$c-main: red;
+body, html {
+  height: 100%;
+}
 
-.main {
-  background: url('./images/background.png');
-  color: $c-main;
+#map {
+  height: 100%;
 }
