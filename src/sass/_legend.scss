@@ -1,0 +1,101 @@
+@use "colors";
+@use "util";
+@use "typography";
+
+$year-stripe-width: 0.75rem;
+
+// CSS variables are set by javascript for each stripe to colour them dynamically.
+:root {
+  --map-legend-color: #{colors.$salmon};
+}
+
+.map-legend {
+  background-color: colors.$background;
+  color: colors.$text;
+
+  border-radius: 0.5rem;
+
+  // This is a flex container because it makes layout easier.
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  min-height: 13rem;
+
+  @include util.box-shadow();
+
+  // Style the legend's title.
+  &__title {
+    // The title shouldn't grow vertically, so set flex to 0.
+    flex: 0;
+    margin: 0.5rem;
+
+    @include typography.heading();
+    font-size: 1.4rem;
+    line-height: 1.4;
+  }
+
+  // Style the actual "legend block" list.
+  ul {
+    // The "legend block" list should grow vertically to fill as much space as
+    // as needed.
+    flex: 1;
+    margin: 0;
+
+    padding: 0.5rem;
+    width: 100%;
+
+    // This is a flex container too so each "legend block" is always the same height.
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  // Style each "legend block".
+  li {
+    // hide the bullet:
+    list-style: none;
+
+    // Grow as much as possible, don't shrink, and base height on height property.
+    flex: 1 0 auto;
+    height: 2rem;
+
+    margin: 0;
+
+    // Display flex so we can position the text and the stripe nicely.
+    display: flex;
+    align-items: stretch;
+  }
+
+  &__year--text {
+    // Grow as much as possible.
+    flex: 1;
+
+    // Display flex to center text vertically & horizontally.
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0 1rem;
+  }
+
+  &__year--stripe {
+    // Don't grow or shrink. Just be a fixed width.
+    flex: 0 0 auto;
+    width: $year-stripe-width;
+
+    // This CSS var is set by javascript dynamically.
+    background-color: colors.$salmon;
+    background-color: var(--map-legend-color, colors.$salmon);
+  }
+
+  // Give the first and last stripe segments curved corners.
+  li:first-child &__year--stripe {
+    border-radius: $year-stripe-width/2 $year-stripe-width/2 0 0;
+  }
+
+  li:last-child &__year--stripe {
+    border-radius: 0 0 $year-stripe-width/2 $year-stripe-width/2;
+  }
+}

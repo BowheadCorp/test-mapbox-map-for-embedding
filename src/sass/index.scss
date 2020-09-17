@@ -1,7 +1,42 @@
+@use "typography";
+@use "colors";
+@use "controls";
+@use "legend";
+@use "marker";
+
+* {
+  box-sizing: border-box;
+}
+
 body, html {
   height: 100%;
+
+  @include typography.body();
+  color: colors.$text;
+
+  background-color: colors.$background;
 }
 
 #map {
   height: 100%;
+  position: relative;
+
+  @include typography.body();
+
+  .placeholder-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  // Hide the placeholder text when the map is loaded:
+  &.mapboxgl-map .placeholder-text {
+    display: none;
+  }
+
+  @include controls.mapboxgl-navigation();
+  @include controls.mapboxgl-scale();
+  @include controls.mapboxgl-attribution();
+  @include controls.mapboxgl-popup();
 }

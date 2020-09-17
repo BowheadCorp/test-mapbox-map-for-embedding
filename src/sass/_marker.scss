@@ -1,0 +1,61 @@
+@use "colors";
+@use "util";
+
+$size: 2.2rem;
+$border-size: 0.3rem;
+$inside-gap: 0.4rem;
+$transition: 0.1s ease-in-out;
+
+// This gets set dynamically by JavaScript for the year the the item was purchased
+// in.
+:root {
+  --map-marker-color: #{colors.$salmon};
+}
+
+.map-marker {
+  width: $size;
+  height: $size;
+  border-radius: $size;
+
+  overflow: hidden;
+
+  opacity: 80%;
+
+  transition: opacity $transition;
+
+  &:hover, &:focus {
+    opacity: 100%;
+  }
+
+  &__inner {
+    width: 100%;
+    height: 100%;
+    border-radius: $size;
+
+    border: $border-size solid;
+    border-color: colors.$salmon;
+    border-color: var(--map-marker-color, colors.$salmon);
+
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      @include util.inset($inside-gap);
+
+      border-radius: $size;
+
+      background-color: colors.$salmon;
+      background-color: var(--map-marker-color, colors.$salmon);
+
+      transition: top $transition,
+        right $transition,
+        bottom $transition,
+        left $transition;
+    }
+
+    &:hover::after, &:focus::after {
+      @include util.inset(-$border-size);
+    }
+  }
+}

@@ -1,0 +1,106 @@
+@use "util";
+@use "colors";
+
+@mixin mapboxgl-navigation {
+  .mapboxgl-ctrl-group {
+    border-radius: 0.5rem;
+    background-color: colors.$background;
+
+    // Only put a box shadow on non-empty control groups.
+    &:not(:empty) {
+      @include util.box-shadow();
+    }
+
+    button {
+      margin: 0;
+      border: none;
+
+      color: colors.$text;
+      background-color: colors.$teal;
+
+      // Add a thin top border to every button but the first:
+      & + button {
+        border-top: 0.1rem solid colors.$background;
+      }
+
+      &:hover, &:focus {
+        background-color: colors.$teal--lighter;
+      }
+    }
+
+    // Add rounded corners to first and last items in group.
+    :first-child {
+      border-radius: 0.5rem 0.5rem 0 0;
+    }
+    :last-child {
+      border-radius: 0 0 0.5rem 0.5rem;
+    }
+  }
+}
+
+@mixin mapboxgl-scale {
+  .mapboxgl-ctrl-scale {
+    background-color: colors.$background;
+    color: colors.$text;
+
+    border: 0.1rem solid colors.$background--darker;
+
+    font-size: 0.8rem;
+
+    @include util.box-shadow--lower();
+  }
+}
+
+@mixin mapboxgl-attribution {
+  .mapboxgl-ctrl-attrib {
+    background-color: colors.$background;
+    color: colors.$text;
+
+    font-size: 0.8rem;
+    border-top-left-radius: 0.5rem;
+
+    @include util.box-shadow();
+
+    a {
+      color: colors.$yellow;
+    }
+  }
+}
+
+@mixin mapboxgl-popup {
+  .mapboxgl-popup {
+    // Note that we have to use filter to apply a drop shadow instead of box-shadow.
+    // This is becuase the popup has a triangular top made with the CSS border
+    // triangle trick. box-shadow casts the shadow in a rectangular shape around
+    // the triangle's hidden borders, while filter conforms to the shape of the
+    // one visible border.
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+
+    // Style the popup's content:
+    &-content {
+      color: colors.$text;
+      background-color: colors.$background;
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+    }
+
+    // Genreate CSS for each possible popup anchor placement to change the color
+    // of the tip.
+    $anchor-tip-border-placement-map: (
+      "top": "bottom",
+      "top-left": "bottom",
+      "top-right": "bottom",
+      "bottom": "top",
+      "bottom-left": "top",
+      "bottom-right": "top",
+      "left": "right",
+      "right": "left"
+    );
+
+    @each $anchor-pos, $border-pos in $anchor-tip-border-placement-map {
+      &-anchor-#{$anchor-pos} .mapboxgl-popup-tip {
+        border-#{$border-pos}-color: colors.$background;
+      }
+    }
+  }
+}
