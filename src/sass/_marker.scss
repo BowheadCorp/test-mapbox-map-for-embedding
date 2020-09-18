@@ -61,8 +61,12 @@ $transition: 0.1s ease-in-out;
         left $transition;
     }
 
-    &:hover::after, &:focus::after {
-      @include util.inset(-$border-size);
-    }
+    // &:hover::after, &:focus::after {
+    //   @include util.inset(-$border-size);
+    // }
+  }
+
+  &:hover &__inner::after, &:focus &__inner::after {
+    @include util.inset(-$border-size);
   }
 }

@@ -3,6 +3,9 @@ const mapMarker = (): HTMLDivElement => {
   const marker = document.createElement('div');
   marker.classList.add('map-marker');
 
+  // Makes the marker keyboard-focusable:
+  marker.setAttribute('tabindex', '0');
+
   const inner = document.createElement('div');
   inner.classList.add('map-marker__inner');
 
