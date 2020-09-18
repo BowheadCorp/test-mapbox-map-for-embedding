@@ -22,13 +22,22 @@ mapboxgl.accessToken = MAPBOX_API_KEY;
 const customMarker = mapMarker();
 
 // Create our Mapbox map.
-const map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/mapbox/dark-v10',
-  center: [0, 0],
-  zoom: 1,
-  logoPosition: 'bottom-right',
-});
+let map;
+
+// This could error out randomly if one of Mapbox's web workers experiences a
+// cache miss. To prevent the rest of our script not running, wrap it in a
+// try/catch block.
+try {
+  map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/dark-v10',
+    center: [0, 0],
+    zoom: 1,
+    logoPosition: 'bottom-right',
+  });
+} catch (e) {
+  console.error(e);
+}
 
 // Add the scale display to the bottom-left.
 map.addControl(new mapboxgl.ScaleControl(), 'bottom-left');
