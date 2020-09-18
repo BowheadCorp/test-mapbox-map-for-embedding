@@ -19,12 +19,19 @@ $transition: 0.1s ease-in-out;
 
   overflow: hidden;
 
-  opacity: 80%;
+  // Note: CSSNano issue #892 doesn't let us use percentages.
+  // See https://github.com/cssnano/cssnano/issues/892
+  // So, don't do this:
+  //
+  // opacity: 80%;
+  //
+  // Instead, do this:
+  opacity: 0.8;
 
   transition: opacity $transition;
 
   &:hover, &:focus {
-    opacity: 100%;
+    opacity: 1;
   }
 
   &__inner {
